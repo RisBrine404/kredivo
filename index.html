@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Akumulasi Hutang</title>
+    <title>Kredivo Transaksi</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -46,10 +46,10 @@
             border-radius: 5px;
         }
         .loading {
-            background-color: #28a745;
+            background-color: #dc3545;
         }
         .finis {
-            background-color: #dc3545;
+            background-color: #28a745;
         }
         .total {
             font-weight: bold;
@@ -61,7 +61,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Akumulasi Hutang</h1>
+        <h1>Kredivo Transaksi</h1>
         <div id="hasil"></div>
     </div>
 
@@ -82,12 +82,12 @@
                 transaksi: [
                     { nama: "PTunai 1", nilai: 614890, status: true },
                     { nama: "PTunai 2", nilai: 614890, status: true },
-                    { nama: "PTunai 3", nilai: 614890, status: false },
+                    { nama: "PTunai 3", nilai: 614890, status: true },
                     { nama: "PTunai 4", nilai: 614890, status: true },
-                    { nama: "PTunai 5", nilai: 614890, status: false },
+                    { nama: "PTunai 5", nilai: 614890, status: true },
                     { nama: "PTunai 6", nilai: 614890, status: true },
                     { nama: "PaketData10Gb", nilai: 50500, status: true },
-                    { nama: "PLN Prepraid token", nilai: 52500, status: false }
+                    { nama: "PLN Prepraid token", nilai: 52500, status: true }
                 ]
             },
             {
@@ -95,7 +95,7 @@
                 transaksi: [
                     { nama: "PaketData20Gb", nilai: 75000, status: true },
                     { nama: "ShopePay", nilai: 382190, status: true },
-                    { nama: "GoPay", nilai: 55500, status: false },
+                    { nama: "GoPay", nilai: 55500, status: true },
                     { nama: "Shopee", nilai: 262230, status: true },
                     { nama: "PaketData10Gb", nilai: 50500, status: true }
                 ]
