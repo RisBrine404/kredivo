@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akumulasi Hutang</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .hutang {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: #fff;
+        }
+        .nama {
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        .item:last-child {
+            border-bottom: none;
+        }
+        .status {
+            font-weight: bold;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 5px;
+        }
+        .loading {
+            background-color: #28a745;
+        }
+        .finis {
+            background-color: #dc3545;
+        }
+        .total {
+            font-weight: bold;
+            text-align: right;
+            margin-top: 15px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Akumulasi Hutang</h1>
+        <div id="hasil"></div>
+    </div>
+
+    <script>
+        function hitungAkumulasiHutang(data) {
+            return data.map(person => {
+                const items = person.transaksi;
+                const total = items
+                    .filter(item => item.status)
+                    .reduce((sum, item) => sum + item.nilai, 0);
+                return { nama: person.nama, items, totalHutang: total };
+            });
+        }
+
+        const daftarHutang = [
+            {
+                nama: "Orang Pertama",
+                transaksi: [
+                    { nama: "PTunai 1", nilai: 614890, status: true },
+                    { nama: "PTunai 2", nilai: 614890, status: true },
+                    { nama: "PTunai 3", nilai: 614890, status: false },
+                    { nama: "PTunai 4", nilai: 614890, status: true },
+                    { nama: "PTunai 5", nilai: 614890, status: false },
+                    { nama: "PTunai 6", nilai: 614890, status: true },
+                    { nama: "PaketData10Gb", nilai: 50500, status: true },
+                    { nama: "PLN Prepraid token", nilai: 52500, status: false }
+                ]
+            },
+            {
+                nama: "Orang Kedua",
+                transaksi: [
+                    { nama: "PaketData20Gb", nilai: 75000, status: true },
+                    { nama: "ShopePay", nilai: 382190, status: true },
+                    { nama: "GoPay", nilai: 55500, status: false },
+                    { nama: "Shopee", nilai: 262230, status: true },
+                    { nama: "PaketData10Gb", nilai: 50500, status: true }
+                ]
+            }
+        ];
+
+        const hasil = hitungAkumulasiHutang(daftarHutang);
+        document.getElementById("hasil").innerHTML = hasil.map(p => `
+            <div class="hutang">
+                <div class="nama">${p.nama}</div>
+                ${p.items.map(item => `
+                    <div class="item">
+                        <span>${item.nama}</span>
+                        <span>Rp ${item.nilai.toLocaleString()}</span>
+                        <span class="status ${item.status ? 'loading' : 'finis'}">${item.status ? 'Loading' : 'Finis'}</span>
+                    </div>
+                `).join('')}
+                <div class="total">Total yang dieksekusi: Rp ${p.totalHutang.toLocaleString()}</div>
+            </div>
+        `).join('');
+    </script>
+</body>
+</html>
